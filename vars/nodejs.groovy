@@ -1,7 +1,4 @@
 def call(){
-    if (!binding.hasVariable('superVariable')){
-        def TAG_NAME = null
-    }
 
     node(){
 
@@ -13,7 +10,7 @@ def call(){
                '''
         }
 
-        if (BRANCH_NAME == TAG_NAME){
+        if (env.BRANCH_NAME == env.TAG_NAME){
             sh "echo yes tag"
         }
        // common.publishArtifacts()
