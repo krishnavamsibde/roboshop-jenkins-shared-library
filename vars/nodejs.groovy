@@ -9,7 +9,9 @@ def call(){
                '''
         }
 
-        sh 'env'
+        if (BRANCH_NAME == TAG_NAME){
+            sh "echo yes tag"
+        }
        // common.publishArtifacts()
     }
 
