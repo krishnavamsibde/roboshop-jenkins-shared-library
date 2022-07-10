@@ -11,9 +11,9 @@ def call(){
         }
 
         if (env.BRANCH_NAME == env.TAG_NAME){
-            sh "echo yes tag"
+            common.publishArtifacts()
         }
-       // common.publishArtifacts()
+
     }
 
 }
