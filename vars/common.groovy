@@ -24,6 +24,12 @@ def publishArtifacts() {
             zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
         """
         }
+        if (env.APP_TYPE == "nginx"){
+            sh """
+            cd static
+            zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+        """
+        }
     }
     stage('Push Artifacts to Nexus'){
         withCredentials([usernamePassword(credentialsId: 'NEXUS', passwordVariable: 'pass', usernameVariable: 'user')]) {
