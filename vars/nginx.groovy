@@ -8,5 +8,3 @@ def call(){
             common.publishArtifacts()
         }
     }
-
-}
