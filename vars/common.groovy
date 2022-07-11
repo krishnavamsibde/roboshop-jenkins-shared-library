@@ -19,6 +19,11 @@ def publishArtifacts() {
             zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
         """
         }
+        if (env.APP_TYPE == "python"){
+            sh """
+            zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+        """
+        }
     }
     stage('Push Artifacts to Nexus'){
         withCredentials([usernamePassword(credentialsId: 'NEXUS', passwordVariable: 'pass', usernameVariable: 'user')]) {
