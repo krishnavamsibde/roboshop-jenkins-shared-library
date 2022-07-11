@@ -13,6 +13,12 @@ def publishArtifacts() {
             zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
         """
         }
+        if (env.APP_TYPE == "maven"){
+            sh """
+            cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+            zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+        """
+        }
     }
     stage('Push Artifacts to Nexus'){
         withCredentials([usernamePassword(credentialsId: 'NEXUS', passwordVariable: 'pass', usernameVariable: 'user')]) {
