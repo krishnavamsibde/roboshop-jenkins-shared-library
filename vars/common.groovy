@@ -41,3 +41,17 @@ def publishArtifacts() {
 
     }
 }
+
+
+def codeChecks(){
+    stage('Quality Checks & Unit Tests') {
+        parallel([
+                qualityChecks: {
+                    echo "hello"
+                },
+                unitTests: {
+                    echo "world"
+                }
+        ])
+    }
+}
