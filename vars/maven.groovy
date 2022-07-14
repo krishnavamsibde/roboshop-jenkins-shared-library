@@ -1,4 +1,5 @@
 def call(){
+    env.EXTRA_OPTS="-Dsonar.java.binaries=./target"
     node(){
 
         common.pipelineInit()
