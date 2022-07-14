@@ -47,7 +47,7 @@ def codeChecks(){
     stage('Quality Checks & Unit Tests') {
         parallel([
                 qualityChecks: {
-                    sh "sonar-scanner -Dsonar.projectKey=${COMPONENT}"
+                    sh "sonar-scanner -Dsonar.projectKey=${COMPONENT} -D sonar.host.url=http://18.213.151.115:9000"
                 },
                 unitTests: {
                     unitTests()
