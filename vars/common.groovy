@@ -43,12 +43,7 @@ def publishArtifacts() {
     }
 
     stage('Deploy to Dev Env'){
-        dir('ANSIBLE') {
-            git branch: 'main', url: "https://github.com/krishnavamsi7616/roboshop-ansible.git"
-            sh """
-                ansible-playbook -i ${COMPONENT}-${}
-             """
-        }
+        build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: '${COMPONENT}'), string(name: 'ENV', value: '${ENV}'), string(name: 'APP_VERSION', value: '${TAG_NAME}')]
     }
 
 }
