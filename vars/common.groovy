@@ -46,12 +46,46 @@ def publishArtifacts() {
         build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENV}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
     }
 
-    stage('Run Smoke Tests') {
+    stage('Run Smoke Tests on Dev') {
         sh "echo smoke tests"
 
     }
     promoteRelease("dev","qa")
+
+
+    stage('Deploy to QA Env') {
+        #build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "qa"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
+        echo "Deploy QA"
+    }
+    testRuns()
+
+    stage('Run Smoke Tests on QA') {
+        sh "echo smoke tests"
+
+    }
+
+    promoteRelease("qa","prod")
 }
+
+
+def testRuns(){
+    stage('Quality Checks & Unit Tests') {
+        parallel([
+                integrationTests: {
+                    echo "Integration Tests"
+                    }
+                },
+                e2eTests: {
+                    echo "E2E Tests"
+                },
+                penTests: {
+                    echo "PenTests"
+                }
+        ])
+    }
+}
+
+
     def promoteRelease(SOURCE_ENV, ENV) {
         withCredentials([usernamePassword(credentialsId: 'NEXUS', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
