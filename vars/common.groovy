@@ -87,13 +87,14 @@ def testRuns(){
 
 
     def promoteRelease(SOURCE_ENV, ENV) {
+        stage("Promoting Artifact from ${SOURCE_ENV} to ${ENV}"){
         withCredentials([usernamePassword(credentialsId: 'NEXUS', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
                    cp ${SOURCE_ENV}-${COMPONENT}-${TAG_NAME}.zip ${ENV}-${COMPONENT}-${TAG_NAME}.zip
                    curl -v -u ${user}:${pass} --upload-file ${ENV}-${COMPONENT}-${TAG_NAME}.zip http://172.31.1.200:8081/repository/${COMPONENT}/${ENV}-${COMPONENT}-${TAG_NAME}.zip
                 """
         }
-
+        }
     }
 
 
