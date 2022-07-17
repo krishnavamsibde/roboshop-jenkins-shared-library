@@ -41,6 +41,16 @@ def publishArtifacts() {
         }
 
     }
+
+    stage('Deploy to Dev Env'){
+        dir('ANSIBLE') {
+            git branch: 'main', url: "https://github.com/krishnavamsi7616/roboshop-ansible.git"
+            sh """
+                ansible-playbook -i ${COMPONENT}-${}
+             """
+        }
+    }
+
 }
 
 
