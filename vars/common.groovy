@@ -57,6 +57,7 @@ def publishArtifacts() {
         // build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "qa"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
         echo "Deploy QA"
     }
+
     testRuns()
 
     stage('Run Smoke Tests on QA') {
@@ -72,8 +73,7 @@ def testRuns(){
     stage('Quality Checks & Unit Tests') {
         parallel([
                 integrationTests: {
-                    echo "Integration Tests"
-                    }
+                    echo "Integration Test"
                 },
                 e2eTests: {
                     echo "E2E Tests"
