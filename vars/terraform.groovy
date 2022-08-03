@@ -7,13 +7,15 @@ def call() {
         ])
         ansiColor('xterm'){
 
-        stage('Code Checkout'){
+        stage('Code Checkout') {
             sh 'rm -rf *'
             git branch: 'main', url: 'https://github.com/krishnavamsi7616/roboshop-terraform-mutable.git'
         }
-
-        stage('Terraform INIT'){
-            sh 'terraform init -migrate-state -backend-config=env/${ENV}-backend.tfvars'
+            stage('Terraform Reconfigure'){
+                sh 'terraform -reconfigure -backend=false'
+            }
+        stage('Terraform INIT') {
+            sh 'terraform init -backend-config=env/${ENV}-backend.tfvars'
         }
 
         stage('Terraform Plan'){
