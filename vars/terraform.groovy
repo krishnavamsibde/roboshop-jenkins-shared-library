@@ -13,7 +13,7 @@ def call() {
         }
 
         stage('Terraform INIT') {
-            sh 'terraform init -backend-config=env/${ENV}-backend.tfvars'
+            sh 'terraform init -migrate-state -backend-config=env/${ENV}-backend.tfvars'
         }
 
         stage('Terraform Plan'){
