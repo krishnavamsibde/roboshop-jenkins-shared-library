@@ -11,9 +11,9 @@ def call() {
             sh 'rm -rf *'
             git branch: 'main', url: 'https://github.com/krishnavamsi7616/roboshop-terraform-mutable.git'
         }
-            stage('Terraform Reconfigure'){
-                sh 'terraform -reconfigure -backend=false'
-            }
+        stage('Destroy'){
+            sh 'terraform destroy -auto-approve -var-file=env/${ENV}.tfvars'
+        }
         stage('Terraform INIT') {
             sh 'terraform init -backend-config=env/${ENV}-backend.tfvars'
         }
