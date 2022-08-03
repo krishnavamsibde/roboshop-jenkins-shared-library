@@ -13,7 +13,6 @@ def call() {
             }
 
 
-
         stage('Terraform INIT') {
             sh 'terraform init -backend-config=env/${ENV}-backend.tfvars'
         }
