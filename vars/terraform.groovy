@@ -3,7 +3,7 @@ def call() {
         properties([
                 parameters([
                         choice(choices: ['dev', 'prod'],  description: "Choose Environment", name: "ENV"),
-                        choice(choices: ['apply', 'destroy'],  description: "Choose Action", name: "ENV")
+                        choice(choices: ['apply', 'destroy'],  description: "Choose Action", name: "ENV"),
                 ])
         ])
         ansiColor('xterm'){
