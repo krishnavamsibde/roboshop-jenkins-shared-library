@@ -143,3 +143,16 @@ def unitTests(){
            """
     }
 }
+
+
+def publishAMI(){
+
+    stage('Publish AMI')
+            {
+        sh '''
+        terraform init
+        terraform apply -auto-approve
+        '''
+    }
+}
+
