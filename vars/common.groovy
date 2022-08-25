@@ -151,7 +151,7 @@ def publishAMI(){
             {
         sh '''
         terraform init
-        terraform apply -auto-approve
+        terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
         '''
     }
 }
@@ -171,13 +171,13 @@ def publishLocalArtifacts(){
         }
         if (env.APP_TYPE == "python") {
             sh """
-            zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+            zip -r *.py ${COMPONENT}.ini requirements.txt
         """
         }
         if (env.APP_TYPE == "nginx") {
             sh """
             cd static
-            zip -r ../${ENV}-${COMPONENT}-${TAG_NAME}.zip *
+            zip -r ../${COMPONENT}-${TAG_NAME}.zip *
         """
         }
     }
