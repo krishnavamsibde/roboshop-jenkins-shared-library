@@ -1,7 +1,7 @@
 def pipelineInit(){
     stage('Intiate Repo'){
-        sh 'rm -rf *'
-        git branch: 'main', url: "https://github.com/krishnavamsi7616/${COMPONENT}.git"
+        sh 'find . | sed -e "1d" | xargs rm -rf'
+        git branch: "${TAG_NAME}", url: "https://github.com/krishnavamsi7616/${COMPONENT}.git"
     }
 }
 
