@@ -146,7 +146,7 @@ def unitTests(){
 
 
 def publishAMI(){
-
+    ansiColor('xterm') {
     stage('Publish AMI')
             {
         sh '''
@@ -154,6 +154,7 @@ def publishAMI(){
         terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
         '''
     }
+}
 }
 
 def publishLocalArtifacts(){
