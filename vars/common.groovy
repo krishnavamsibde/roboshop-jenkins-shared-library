@@ -1,7 +1,9 @@
 def pipelineInit(){
     stage('Intiate Repo'){
         sh 'find . | sed -e "1d" | xargs rm -rf'
-        git branch: "${TAG_NAME}", url: "https://github.com/krishnavamsi7616/${COMPONENT}.git"
+        git branch: "main", url: "https://github.com/krishnavamsi7616/${COMPONENT}.git"
+        sh 'git tag --list'
+        sh 'exit 1'
     }
 }
 
