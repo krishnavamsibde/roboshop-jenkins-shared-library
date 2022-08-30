@@ -160,28 +160,28 @@ def publishAMI(){
 }
 
 def publishLocalArtifacts(){
-    stage('Publish Local Artifacts'){
+    stage('Publish Local Artifacts') {
         if (env.APP_TYPE == "nodejs") {
             sh """
-            zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
-        """
+        zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+      """
         }
         if (env.APP_TYPE == "maven") {
             sh """
-            cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-            zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
-        """
+        cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+        zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+      """
         }
         if (env.APP_TYPE == "python") {
             sh """
-            zip -r *.py ${COMPONENT}.ini requirements.txt
-        """
+        zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+      """
         }
         if (env.APP_TYPE == "nginx") {
             sh """
-            cd static
-            zip -r ../${COMPONENT}-${TAG_NAME}.zip *
-        """
+        cd static
+        zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+      """
         }
     }
 }

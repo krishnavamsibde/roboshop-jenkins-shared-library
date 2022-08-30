@@ -10,7 +10,9 @@ def call(){
         common.codeChecks()
 
         if (env.BRANCH_NAME == env.TAG_NAME){
+            //common.publishArtifacts()
             common.publishLocalArtifacts()
+            //THis is added for immutable approach
             common.publishAMI()
         }
     }
