@@ -11,7 +11,7 @@ def call() {
 
             stage('Code Checkout') {
                 sh 'find . | sed -e "1d" | xargs rm -rf'
-                git branch: 'main', url: 'https://github.com/krishnavamsi7616/roboshop-terraform-mutable.git'
+                git branch: 'main', url: "https://github.com/krishnavamsi7616/${REPO_NAME}.git"
             }
 
             stage('Terraform INIT') {
